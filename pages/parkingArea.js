@@ -134,7 +134,7 @@ export default function ParkiongArea (){
         </Box>
         <Typography sx={{fontWeight:'bold',ml:'5%',color:'black',pb:2}}> Area floors</Typography>
         <Box sx={{width:'90%', margin:'auto'}}>
-        <Accordion>
+        <Accordion defaultExpanded>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"

@@ -100,7 +100,7 @@ export default function Checkout() {
         </Box>
       </Box>
 
-      <Stepper activeStep={activeStep} sx={{ pt: 1, pb: 1, width:'50%', ml:3, mt: 5}} alternativeLabel>
+      <Stepper size = 'large' activeStep={activeStep} sx={{ pt: 1, pb: 1, width:'50%', ml:3, mt: 5}} alternativeLabel>
           {steps.map((label) => (
             <Step key={label} sx={{fontSize:40}}>
               <StepLabel>{label}</StepLabel>
