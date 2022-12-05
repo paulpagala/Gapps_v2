@@ -207,6 +207,8 @@ export default function PolicyDetails() {
                   value={numberOfSlots}
                   onChange={handleChangeNumberOfSlots}
                   sx={{ backgroundColor: '#FFFFFF' }}
+                  inputProps={{min:0}}
+                  placeholder="0"
                 />
                 <br />
                 <FormControlLabel

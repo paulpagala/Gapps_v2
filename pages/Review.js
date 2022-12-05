@@ -108,6 +108,11 @@ export default function AddressForm() {
                   onChange={handleChange}
                   error={error}
                   helperText={error ? 'Please enter an integer value' : ''}
+                  placeholder="0.00"
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">PHP</InputAdornment>,min:0
+                  }}
+                 
                 />
               </FormControl>
               <FormControl sx={{ ml: 6, width: 400 }} >
@@ -117,6 +122,8 @@ export default function AddressForm() {
                   onChange={handleChangeNumber}
                   error={errorPhoneNumber}
                   helperText={errorPhoneNumber ? 'Please enter a valid phone number' : ''}
+                  placeholder="Enter GCash number"
+                  InputProps={{min:0}}
                 />
               </FormControl>
             </Box>
@@ -141,6 +148,7 @@ export default function AddressForm() {
               value={earliestBook}
               onChange={handleChangeEarliestBook}
               sx={{ width: '86px', ml: 3 }}
+              inputProps={{min:0}}
             />
             <Typography component="subtitle1" variant="subtitle1" sx={{ color: 'black', ml: 3 }}>days before the booking</Typography>
           </Box>
@@ -163,6 +171,7 @@ export default function AddressForm() {
               value={cancelDeadline}
               onChange={handleChangeCancelDeadline}
               sx={{ width: '86px', ml: 3 }}
+              inputProps={{min:0}}
             />
             <Typography component="subtitle1" variant="subtitle1" sx={{ color: 'black', ml: 3 }}>minutes before the booking</Typography>
           </Box>
