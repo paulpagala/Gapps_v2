@@ -23,15 +23,7 @@ import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
 
 function Placeholder() {
   return <div className="editor-placeholder">
-  Lorem ipsum dolor sit amet, 
-  consectetur adipiscing elit, 
-  sed do eiusmod tempor incididunt ut 
-  labore et dolore magna aliqua....
-  <></>
-  Lorem ipsum dolor sit amet, 
-  consectetur adipiscing elit, 
-  sed do eiusmod tempor incididunt ut 
-  labore et dolore magna aliqua....</div>;
+ Enter policies here</div>;
 }
 
 const editorConfig = {

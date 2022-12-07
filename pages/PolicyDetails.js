@@ -9,7 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from '@mui/material';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDropzone } from 'react-dropzone';
 import copy_logo from "/public/clone,-copy,-document,-file.svg";
 import Image from 'next/image'
@@ -19,6 +19,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 //
 import useLocalStorage from '../hooks/useLocalStorage';
+import Router, { useRouter } from 'next/router';
 
 
 
@@ -49,7 +50,7 @@ export default function PolicyDetails() {
     setAreaFloor(event.target.value);
   };
 
-  const [numberOfSlots, setNumberOfSlots] = React.useState();
+  const [numberOfSlots, setNumberOfSlots] = React.useState('');
   const handleChangeNumberOfSlots = (event) => {
     setNumberOfSlots(event.target.value);
   };
@@ -68,40 +69,76 @@ export default function PolicyDetails() {
 
   const { slots } = state;
 
+  // const arr = [];
+  // const copyArr = [...arr];
 
-  const arr = [];
-  const copyArr = [...arr];
 
+  // for (let i = 0; i < parseInt(numberOfSlots); i++) {
+  //   copyArr.push({ id: i, desc: [] });
+  // }
 
-  for (let i = 0; i < parseInt(numberOfSlots); i++) {
-    copyArr.push({ id: i, desc: [] });
+  // const [data, setData] = useLocalStorage('parking slot names',copyArr)
+  // const onchangeInput = (val, index) => {
+  //   let temp = data;
+  //   temp[index] = val.target.value;
+  //   setData(temp);
+  //   // console.log(temp);
+  // };
+
+  const array = [];
+  for (let i = 1; i <= numberOfSlots; i++) {
+    // Add each number to the array
+    array.push(i);
   }
-  const [data, setData] = useState(copyArr)
-  const onchangeInput = (val, index) => {
-    let temp = data;
-    temp[index] = val.target.value;
-    setData(temp);
-    // console.log(temp);
+
+  const [fieldValues, setFieldValues] = useState([]);
+
+  // Function to handle changes to the text field values
+  const handleFieldValuesChange = (index, event) => {
+    // Create a copy of the field values array
+    const newFieldValues = [...fieldValues];
+
+    // Update the value at the specified index
+    newFieldValues[index] = event.target.value;
+
+    // Update the state variable with the new field values array
+    setFieldValues(newFieldValues);
   };
-
-
-  let element = copyArr.map((value, index) =>
-
-    <Box key={index + 1} sx={{ mb: 3, display: 'flex', flexDirection: "column", alignItems: 'left', alignContent: 'stretch', ml: 2 }}>
+  // Use the map method to create 10 TextField components
+  let textFields = array.map((value, index) => (
+    <Box key={index}sx={{ mb: 3, display: 'flex', flexDirection: "column", alignItems: 'left', alignContent: 'stretch', ml: 2 }}>
       <Typography variant="subtitle1" sx={{ color: 'black' }} gutterBottom>Slot name {index + 1}</Typography>
       <TextField
-        id="outlined-parkingName"
-        // label=""
-        // value={data}
-        onChange={(val) => { onchangeInput(val, index) }}
+        key={index + 1}
+        onChange={(event) => handleFieldValuesChange(index, event)}
         variant="outlined"
         sx={{ backgroundColor: 'white', width: 326 }}
         placeholder="Enter Slot Name"
-
       />
     </Box>
+  ));
 
-  );
+
+
+  const duplicates = fieldValues.filter((value, index) => fieldValues.indexOf(value) !== index);
+
+  const seenValues = {};
+
+  // Create an array to store the indexes of duplicate elements and their original index
+  const duplicateIndexes = [];
+
+  // Loop over array elements
+  for (let i = 0; i < fieldValues.length; i++) {
+    const element = fieldValues[i];
+
+    // If the element has already been seen, add the index and the original index to the array
+    if (seenValues[element]) {
+      duplicateIndexes.push([i, seenValues[element]]);
+    } else {
+      // Otherwise, add the element to the object so we know it has been seen
+      seenValues[element] = i;
+    }
+  }
 
 
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
@@ -131,7 +168,9 @@ export default function PolicyDetails() {
     });
   }
 
-
+  // console.log(fieldValues)
+  // console.log(duplicates)
+  // console.log(duplicateIndexes)
   return (
     <React.Fragment>
       <Paper variant="outlined" sx={{ my: { md: 3, lg: 5 }, p: { md: 2, lg: 3 } }}>
@@ -207,7 +246,7 @@ export default function PolicyDetails() {
                   value={numberOfSlots}
                   onChange={handleChangeNumberOfSlots}
                   sx={{ backgroundColor: '#FFFFFF' }}
-                  inputProps={{min:0}}
+                  inputProps={{ min: 0 }}
                   placeholder="0"
                 />
                 <br />
@@ -221,7 +260,7 @@ export default function PolicyDetails() {
                 {slots ? (
                   <Accordion defaultExpanded>
                     <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
+                      expandIcon={<ExpandMoreIcon style={{ color: 'white' }} />}
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                       sx={{ backgroundColor: '#333E5D' }}
@@ -230,7 +269,12 @@ export default function PolicyDetails() {
                     </AccordionSummary>
                     <AccordionDetails>
                       <Paper variant="outlined" sx={{ mr: 5, ml: 5, my: { md: 1, lg: 3 }, p: { md: 2, lg: 3 }, backgroundColor: '#EFEFEF' }}>
-                        {element}
+                        {textFields}
+                        <Box sx={{ display: 'flex', justifyContent: 'center', color: 'red' }}>
+                          {duplicates.length > 0 && <Typography>There are duplicate values in the slot names!</Typography>}
+                          {/* {duplicateIndexes} */}
+                          {/* {duplicates} */}
+                        </Box>
                       </Paper>
                     </AccordionDetails>
                   </Accordion>)
