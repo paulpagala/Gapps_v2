@@ -36,8 +36,6 @@ export default function PolicyDetails() {
     setParkingArea(event.target.value);
   };
 
-
-
   const [changeAddress, setChangeAddress] = useLocalStorage('parkingAddress', '');
 
   const handleChangeAddress = (event) => {
@@ -50,7 +48,7 @@ export default function PolicyDetails() {
     setAreaFloor(event.target.value);
   };
 
-  const [numberOfSlots, setNumberOfSlots] = useLocalStorage('numberofslots','');
+  const [numberOfSlots, setNumberOfSlots] = useLocalStorage('numberofslots', '');
   const [error, setError] = React.useState(false);
   const handleChangeNumberOfSlots = (event) => {
     setNumberOfSlots(event.target.value);
@@ -60,8 +58,8 @@ export default function PolicyDetails() {
       setError(false);
     }
   };
- 
-  
+
+
 
   const [state, setState] = React.useState({
     slots: false,
@@ -98,7 +96,7 @@ export default function PolicyDetails() {
     array.push(i);
   }
 
-  const [fieldValues, setFieldValues] = useLocalStorage('slotnames',[]);
+  const [fieldValues, setFieldValues] = useLocalStorage('slotnames', []);
 
   // Function to handle changes to the text field values
   const handleFieldValuesChange = (index, event) => {
@@ -113,7 +111,7 @@ export default function PolicyDetails() {
   };
   // Use the map method to create 10 TextField components
   let textFields = array.map((value, index) => (
-    <Box key={index}sx={{ mb: 3, display: 'flex', flexDirection: "column", alignItems: 'left', alignContent: 'stretch', ml: 2 }}>
+    <Box key={index} sx={{ mb: 3, display: 'flex', flexDirection: "column", alignItems: 'left', alignContent: 'stretch', ml: 2 }}>
       <Typography variant="subtitle1" sx={{ color: 'black' }} gutterBottom>Slot name {index + 1}</Typography>
       <TextField
         key={index + 1}
@@ -172,6 +170,9 @@ export default function PolicyDetails() {
       this.parentElement.style.display = 'none';
     });
   }
+
+
+
 
   // console.log(fieldValues)
   // console.log(duplicates)
@@ -244,7 +245,7 @@ export default function PolicyDetails() {
                 <TextField
                   id="outlined-number"
                   // label="Number of Slots"
-                  type = 'number'
+                  type='number'
                   InputLabelProps={{
                     shrink: true,
                   }}

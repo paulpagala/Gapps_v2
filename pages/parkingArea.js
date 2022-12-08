@@ -28,6 +28,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import { useGlobalContext } from '../context/global';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+// import axios from 'axios';
 
 
 
@@ -36,6 +38,7 @@ import { useRouter } from 'next/router';
 export default function ParkiongArea() {
   const [selected, setSelected] = React.useState(false);
   const [filterActive, setFilterActive] = React.useState();
+  const [error, setError] = React.useState("");
   // const router = useRouter();
 
   const handleChangeFilterActive = (event) => {
@@ -72,6 +75,11 @@ export default function ParkiongArea() {
 
   const slotNames = JSON.parse(window.localStorage.getItem('slotnames'))
   const numberOfSlots = parseInt(JSON.parse(window.localStorage.getItem('numberofslots')))
+  // const [numberOfSlots, setNumberOfSlots] = React.useState()
+
+  // const handleChangeNumberOfSlots = (event) => {
+  //   setNumberOfSlots(event.target.value);
+  // };
 
   function createData(slotId, slotName, status, action) {
     return { slotId, slotName, status, action };
@@ -94,7 +102,36 @@ export default function ParkiongArea() {
   //   const {serviceFee} = useGlobalContext();
 
   // console.log(slotNames[0])
+  function FindSlotNumbers() {
+    const options = {
+      method: 'GET',
+      // mode:'no-cors',
+      headers: {
+        'Content-Type':'application/json',
+        // 'Access-Control-Allow-Origin':"*",
+      }
+    };
+    // setIsLoading(true);
+    // const gender = "male"
+    // const height = "165"
+    fetch('https://zh66xn42vk.execute-api.ap-southeast-1.amazonaws.com/stage/parkingareas',options)
+      .then((response) => response.json())
+      .then((response) => {
+        // setWeight(response.data.Hamwi);
+        console.log(response);
+        // setIsLoading(false);
+      })
+      .catch(() => {
+        setError("Failed to retrieve from api");
+      });
+  }
 
+  useEffect(() => {
+    const getData = () => {
+      FindSlotNumbers();
+    };
+    getData();
+  }, []);
   return (
     <React.Fragment>
       <Box sx={{ width: "90%", height: "5%", ml: '5%', mr: '5%', mt: '8%', borderRadius: '50%' }}>

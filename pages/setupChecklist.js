@@ -28,6 +28,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import success_logo_source from "../public/success-svgrepo-com.svg";
+import { useEffect } from 'react';
 
 
 const steps = ['Service Settings', 'Parking Areas & slots', ' Rules & guidelines'];
@@ -74,6 +75,36 @@ export default function Checkout() {
   };
 
 
+  async function postParkingArea(url = '', data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
+  }
+
+
+if (activeStep===2) {
+  // useEffect(() => {
+  //   const getData = () => {
+      postParkingArea('https://zh66xn42vk.execute-api.ap-southeast-1.amazonaws.com/stage/parkingarea',
+        {
+          "parkingArea": JSON.parse(window.localStorage.getItem('parkingArea')),
+          "parkingAddress": JSON.parse(window.localStorage.getItem('parkingAddress')),
+          "slots": parseInt(JSON.parse(window.localStorage.getItem('numberofslots')))
+        })
+        .then((data) => {
+          console.log(data); // JSON data parsed by `data.json()` call
+        });
+  //   };
+  //   getData();
+  // }, []);
+}
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
