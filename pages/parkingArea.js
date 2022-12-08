@@ -36,19 +36,19 @@ import { useRouter } from 'next/router';
 export default function ParkiongArea() {
   const [selected, setSelected] = React.useState(false);
   const [filterActive, setFilterActive] = React.useState();
-  const router = useRouter();
-  
+  // const router = useRouter();
+
   const handleChangeFilterActive = (event) => {
     setFilterActive(event.target.value);
   };
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  // const open = Boolean(anchorEl);
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -70,18 +70,30 @@ export default function ParkiongArea() {
     },
   }));
 
+  const slotNames = JSON.parse(window.localStorage.getItem('slotnames'))
+  const numberOfSlots = parseInt(JSON.parse(window.localStorage.getItem('numberofslots')))
+
   function createData(slotId, slotName, status, action) {
     return { slotId, slotName, status, action };
   }
 
-  const rows = [
-    createData('MCHD001', 'N/A', 'Active', 'pj'),
-    // createData('The Globe Tower', 'Not Specified', 'Active','pj'),
-    // createData('Three Parkade', 'H23X+5HH, Taguig, Metro Manila','Active','pj'),
-  ];
+  const rows = [];
+  for (let i = 1; i <= numberOfSlots; i++) {
+    // Add each number to the array
+    rows.push(createData('MCHD00' + i, slotNames[i - 1], 'Active', 'pj'));
+  }
+
+  // let textFields = array.map((value, index) => (
+
+  // ));
+  // const rows = [
+  //   createData('MCHD001', 'N/A', 'Active', 'pj'),
+  //   // createData('The Globe Tower', 'Not Specified', 'Active','pj'),
+  //   // createData('Three Parkade', 'H23X+5HH, Taguig, Metro Manila','Active','pj'),
+  // ];
   //   const {serviceFee} = useGlobalContext();
 
-
+  // console.log(slotNames[0])
 
   return (
     <React.Fragment>

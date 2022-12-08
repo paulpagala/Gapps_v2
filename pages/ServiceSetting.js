@@ -251,6 +251,7 @@ export default function ServiceSetting() {
             {weekday.includes("friday") ? (<BookingAvailability day="Friday" />) : null}
             {weekday.includes("saturday") ? (<BookingAvailability day="Saturday" />) : null}
             {weekday.includes("sunday") ? (<BookingAvailability day="Sunday" />) : null} */}
+            {/* <BookingAvailability day="Monday" /> */}
             {bookingDay}
           </Box>
         </Box>

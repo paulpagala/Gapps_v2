@@ -107,7 +107,7 @@ export default function AddressForm() {
                   value={value}
                   onChange={handleChange}
                   error={error}
-                  helperText={error ? 'Please enter an integer value' : ''}
+                  helperText={error ? 'Please enter a valid amount' : ''}
                   placeholder="0.00"
                   InputProps={{
                     startAdornment: <InputAdornment position="start">PHP</InputAdornment>,min:0

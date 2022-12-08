@@ -50,11 +50,18 @@ export default function PolicyDetails() {
     setAreaFloor(event.target.value);
   };
 
-  const [numberOfSlots, setNumberOfSlots] = React.useState('');
+  const [numberOfSlots, setNumberOfSlots] = useLocalStorage('numberofslots','');
+  const [error, setError] = React.useState(false);
   const handleChangeNumberOfSlots = (event) => {
     setNumberOfSlots(event.target.value);
+    if (!Number.isInteger(Number(event.target.value))) {
+      setError(true);
+    } else {
+      setError(false);
+    }
   };
-
+ 
+  
 
   const [state, setState] = React.useState({
     slots: false,
@@ -91,7 +98,7 @@ export default function PolicyDetails() {
     array.push(i);
   }
 
-  const [fieldValues, setFieldValues] = useState([]);
+  const [fieldValues, setFieldValues] = useLocalStorage('slotnames',[]);
 
   // Function to handle changes to the text field values
   const handleFieldValuesChange = (index, event) => {
@@ -117,8 +124,6 @@ export default function PolicyDetails() {
       />
     </Box>
   ));
-
-
 
   const duplicates = fieldValues.filter((value, index) => fieldValues.indexOf(value) !== index);
 
@@ -239,12 +244,14 @@ export default function PolicyDetails() {
                 <TextField
                   id="outlined-number"
                   // label="Number of Slots"
-                  type="number"
+                  type = 'number'
                   InputLabelProps={{
                     shrink: true,
                   }}
                   value={numberOfSlots}
                   onChange={handleChangeNumberOfSlots}
+                  error={error}
+                  helperText={error ? 'Please enter a valid amount' : ''}
                   sx={{ backgroundColor: '#FFFFFF' }}
                   inputProps={{ min: 0 }}
                   placeholder="0"
