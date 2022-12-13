@@ -88,7 +88,7 @@ export default function ParkiongArea() {
   const rows = [];
   for (let i = 1; i <= numberOfSlots; i++) {
     // Add each number to the array
-    rows.push(createData('MCHD00' + i, slotNames[i - 1], 'Active', 'pj'));
+    rows.push(createData('MCHD00' + i, slotNames[i - 1], 'Available', 'pj'));
   }
 
   // let textFields = array.map((value, index) => (
@@ -118,7 +118,7 @@ export default function ParkiongArea() {
       .then((response) => response.json())
       .then((response) => {
         // setWeight(response.data.Hamwi);
-        console.log(response);
+        console.log(response.ParkingAreas[5].slots);
         // setIsLoading(false);
       })
       .catch(() => {
@@ -252,7 +252,7 @@ export default function ParkiongArea() {
                           <CircleIcon sx={{ fontSize: 10, color: '#00DE9A', mt: 1 }} />
                           <Typography component="subtitle1" variant="subtitle1" sx={{ ml: 0.5 }} gutterBottom>
                             {/* {selectedParking ? "Inactive" : "Active"} */}
-                            Available
+                            {row.status}
                           </Typography>
                         </Box>
                       </StyledTableCell>
