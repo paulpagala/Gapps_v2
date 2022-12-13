@@ -123,7 +123,6 @@ export default function ServiceSetting() {
   };
 
 
-  
 
   const array = [];
   const timeArray = ['7:00AM',
@@ -281,14 +280,14 @@ export default function ServiceSetting() {
                   control={
                     <Checkbox checked={checkIn} onChange={handleChangeCheckIn} name="checkin" />
                   }
-                  label="Accomplish health declariton before check-in"
+                  label="Accomplish health declaration before check-in"
                 />
                 <Box>
                   <Typography component="b1" variant="b1" sx={{ color: 'black' }} gutterBottom>
                     Latest check-in time
                   </Typography>
                 </Box>
-                <FormControl sx={{ my: 3, ml: 3.5, minWidth: 250, display: 'inline' }}>
+                <FormControl sx={{ my: 3, minWidth: 250, display: 'inline' }}>
                   {/* <InputLabel id="demo-simple-select-autowidth-label">days</InputLabel> */}
                   <Select
                     labelId="demo-simple-select-autowidth-label"
@@ -325,14 +324,14 @@ export default function ServiceSetting() {
                   control={
                     <Checkbox checked={checkInAndOut} onChange={handleChangeCheckInAndOut} inputProps={{ 'aria-label': 'controlled' }} name="checkInandOut" />
                   }
-                  label="Accomplish health declariton before check-in"
+                  label="Accomplish health declaration before check-in"
                 />
                 <Box>
                   <Typography component="b1" variant="b1" sx={{ color: 'black' }} gutterBottom>
                     Latest check-in time
                   </Typography>
                 </Box>
-                <FormControl sx={{ my: 3, ml: 3.5, minWidth: 250, display: 'inline' }}>
+                <FormControl sx={{ my: 3, minWidth: 250, display: 'inline' }}>
                   {/* <InputLabel id="demo-simple-select-autowidth-label">days</InputLabel> */}
                   <Select
                     labelId="demo-simple-select-autowidth-label"

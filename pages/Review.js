@@ -149,6 +149,7 @@ export default function AddressForm() {
               onChange={handleChangeEarliestBook}
               sx={{ width: '86px', ml: 3 }}
               inputProps={{min:0}}
+              placeholder="0"
             />
             <Typography component="subtitle1" variant="subtitle1" sx={{ color: 'black', ml: 3 }}>days before the booking</Typography>
           </Box>
@@ -172,6 +173,7 @@ export default function AddressForm() {
               onChange={handleChangeCancelDeadline}
               sx={{ width: '86px', ml: 3 }}
               inputProps={{min:0}}
+              placeholder="0"
             />
             <Typography component="subtitle1" variant="subtitle1" sx={{ color: 'black', ml: 3 }}>minutes before the booking</Typography>
           </Box>
